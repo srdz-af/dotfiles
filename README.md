@@ -4,6 +4,9 @@ This is the repository of my personal linux environment setup, it may vary
 from time to time, so i heavily recommend to fork it if you like a setup at any
 given time.
 
+## Screenshot
+![Sample workflow](screenshot.png?raw=true "Optional Title")
+
 ## Utilities used
 
 - Window manager: [`i3-gaps`](https://github.com/Airblader/i3) by [Airblader](https://github.com/Airblader).
