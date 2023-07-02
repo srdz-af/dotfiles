@@ -1,19 +1,18 @@
 configuration{
-    modi: "run,drun,window";
-    icon-theme: "Papirus";
+    modi: "menu:rofi-power-menu,run,drun,window,calc";
+    icon-theme: "Gruvbox";
     show-icons: false;
     terminal: "alacritty";
     drun-display-format: "{icon} {name}";
     location: 0;
     disable-history: false;
     hide-scrollbar: true;
-    display-drun: "   Apps ";
-    display-run: "   Run ";
-    display-window: " 﩯  Window";
-    display-Network: " 󰤨  Network";
+    display-drun: "";
+    display-run: "";
+    display-window: "󰎠";
+    display-calc: "󰃬";
     sidebar-mode: true;
 }
 
-//@theme "catppuccin-mocha"
 
-@theme "/home/user/.local/share/rofi/themes/catppuccin-macchiato.rasi"
+@theme "/home/user/.local/share/rofi/themes/gruvbox.rasi"

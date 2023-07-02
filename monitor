@@ -5,25 +5,32 @@ Time(){
 	echo -n "$TIME"
 }
 
+Light(){
+	L=$(light)
+	LIGHTINFO=${L%.*?}
+	LIGHTICON="󰃟"
+	echo -n "$LIGHTICON  $LIGHTINFO"
+}
+
 Cpu(){
 	CPUINFO=$(ps -A -o pcpu | tail -n+2 | paste -sd+ | bc)
 	CPUICON=""
-	echo -n "$CPUICON   $CPUINFO"
+	echo -n "$CPUICON  $CPUINFO"
 }
 Mem(){
 	MEMINFO=$(free -h | awk 'FNR == 2 {print $4}' | tr -d i)
 	MEMICON=""
-	echo -n "$MEMICON   $MEMINFO"
+	echo -n "$MEMICON  $MEMINFO"
 }
 
 Disk(){
 	DISKINFO=$(df -h | awk 'FNR == 4 {print $5}')
 	DISKICON=""
-	echo -n "$DISKICON   $DISKINFO"
+	echo -n "$DISKICON  $DISKINFO"
 }
 
 Lan(){
-	LANINFO=$(cat /proc/net/wireless | awk 'FNR == 3 {print $4}' | tr -d .-)
+	LANINFO=$(iwgetid -r)
 	if [ $(nmcli r wifi) == enabled ] && [ -z "$LANINFO" ]
 		then
 			LANICON=""
@@ -35,7 +42,7 @@ Lan(){
 	else    
 		LANICON=""
 	fi
-	echo -n "$LANICON"
+	echo -n "$LANICON  $LANINFO"
 }
 
 Temp(){
@@ -61,15 +68,15 @@ Temp(){
 		then
 			TEMPICON=""
 	fi
-	echo -n "$TEMPICON   $TEMPINFO"
+	echo -n "$TEMPICON  $TEMPINFO"
 }
 
 Bat(){	
 	
-	BATINFO=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage | awk '{print $2}')
+	BATINFO=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep percentage | awk '{print $2}')
 	BATNUM=${BATINFO::-1}
 
-	if [[ $(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep state | awk '{print $2}') == "charging" ]]
+	if [[ $(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep state | awk '{print $2}') == "charging" ]]
 	then 
 		BATICON=""
 	else 
@@ -91,7 +98,7 @@ Bat(){
 				BATICON=""
 		fi
 	fi
-	echo -n "$BATICON   $BATINFO"
+	echo -n "$BATICON  $BATINFO"
 }
 
 Vol(){
@@ -99,10 +106,11 @@ Vol(){
 	VOLINFO=$(pactl list sinks | awk 'FNR == 10 {print $5}')
 	VOLNUM=${VOLINFO::-1}
 	VOLSTATE=$(pactl list sinks | awk 'FNR == 9 {print $2}')
-	
-	if (($VOLNUM == 0)) || [[ $VOLSTATE == "sí" ]]
+	YES="yes"
+	NO="no"
+	if [[ $VOLNUM == 0 ||  $VOLSTATE == $YES ]]
 		then
-			VOLICON=""
+			VOLICON="󰝟"
 	elif ((0 < $VOLNUM && $VOLNUM <= 33))
 		then
 			VOLICON=""
@@ -113,7 +121,7 @@ Vol(){
 		then
 			VOLICON=""
 	fi
-	echo -n "$VOLICON   $VOLINFO"
+	echo -n "$VOLICON  $VOLINFO"
 }
 
 i3_Workspace(){
@@ -121,5 +129,8 @@ i3_Workspace(){
 	WORKSPACE=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).name' | cut -d"\"" -f2)
 	echo -n "$WORKSPACE"
 }
-
-echo -e "$(Vol)   $(Bat)   $(Lan)   $(Time)"
+while true
+do
+	sleep 0.01
+	echo -e "$(Light)   $(Vol)   $(Bat)   $(Lan)   $(Time)"
+done

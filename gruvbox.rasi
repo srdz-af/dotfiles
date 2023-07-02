@@ -1,15 +1,15 @@
 * {
-    bg-col:  #24273a;
-    bg-col-light: #24273a;
-    border-col: #24273a;
-    selected-col: #24273a;
-    blue: #8aadf4;
-    fg-col: #cad3f5;
-    fg-col2: #ed8796;
-    grey: #6e738d;
+    bg-col:  #1d2021;
+    bg-col-light: #3c3836;
+    border-col: #282828;
+    selected-col: #689d61;
+    blue: #455888;
+    fg-col: #ebdbb2;
+    fg-col2: #edbdb2;
+    grey: #a89984;
 
     width: 600;
-    font: "JetBrainsMono Nerd Font 9";
+    font: "JetBrainsMono Nerd Font Bold 9";
 }
 
 element-text, element-icon , mode-switcher {
@@ -19,7 +19,7 @@ element-text, element-icon , mode-switcher {
 
 window {
     height: 360px;
-    border: 3px;
+    border: 0px;
     border-color: @border-col;
     background-color: @bg-col;
 }
@@ -36,11 +36,11 @@ inputbar {
 }
 
 prompt {
-    background-color: @blue;
-    padding: 6px;
-    text-color: @bg-col;
-    border-radius: 3px;
+    text-color: @selected-col;
+    background-color: @bg-col;
+    border-radius: 0px;
     margin: 20px 0px 0px 20px;
+    padding: 5px;
 }
 
 textbox-prompt-colon {
@@ -58,7 +58,7 @@ entry {
 listview {
     border: 0px 0px 0px;
     padding: 6px 0px 0px;
-    margin: 10px 0px 0px 20px;
+    margin: 10px 10px 20px 20px;
     columns: 1;
     lines: 5;
     background-color: @bg-col;
@@ -75,8 +75,8 @@ element-icon {
 }
 
 element selected {
-    background-color:  @selected-col ;
-    text-color: @blue  ;
+    background-color:  @bg-col;
+    text-color: @selected-col  ;
 }
 
 mode-switcher {
@@ -92,6 +92,6 @@ button {
 }
 
 button selected {
-  background-color: @blue;
+  background-color: @selected-col;
   text-color: @bg-col;
 }
