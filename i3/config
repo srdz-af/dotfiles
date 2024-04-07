@@ -33,6 +33,7 @@ default_floating_border pixel 0
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id feh --bg-fill .wallpaper
 exec --no-startup-id xinput set-prop "GXTP7863:00 27C6:01E0 Touchpad" "libinput Tapping Enabled" 1
+exec --no-startup-id blueman-applet
 exec --no-startup-id picom 
 exec --no-startup-id setxkbmap latam
 exec --no-startup-id tint2
@@ -86,8 +87,8 @@ bindsym $mod+f fullscreen toggle
 # Tiling / floating toggle
 bindsym $mod+Shift+space floating toggle
 
-# Focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# Change keyboard distribution
+bindsym $mod+space exec --no-startup-id setxkbmap latam
 
 # Focus the parent container
 bindsym $mod+a focus parent
@@ -98,6 +99,7 @@ set $ws2 "󰬺 󰎧 󰬼 󰬽 󰬾"
 set $ws3 "󰬺 󰬻 󰎪 󰬽 󰬾"
 set $ws4 "󰬺 󰬻 󰬼 󰎭 󰬾"
 set $ws5 "󰬺 󰬻 󰬼 󰬽 󰎱"
+set $ws6 "    "
 
 # Switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -105,6 +107,7 @@ bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
+bindsym $mod+0 workspace $ws6
 
 # Move focused window to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -117,7 +120,7 @@ bindsym $mod+Shift+5 move container to workspace $ws5
 bindsym $mod+Shift+r restart
 
 # Exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3wm?, this will close your X session and all unsaved changes will be lost' -B 'Yes, do as i say!' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit' -B 'Y' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {

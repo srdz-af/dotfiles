@@ -81,3 +81,4 @@ vnoremap K :m '<-2<CR>gv=gv
 
 set termguicolors
 set lazyredraw
+autocmd BufNew,BufRead *.asm set ft=nasm
